@@ -31,8 +31,7 @@ public class PostagensModel {
 	
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataRegistro = new java.sql.Date(System.currentTimeMillis());
-
+	private Date dataRegistro = new java.sql.Date(System.currentTimeMillis()); 
 	
 	
 	
