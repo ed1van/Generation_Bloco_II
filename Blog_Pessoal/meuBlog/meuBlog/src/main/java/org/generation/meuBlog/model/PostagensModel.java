@@ -6,15 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
-@Table(name = "Postagem")
+@Table(name = "tb_postagem")
 public class PostagensModel {
 
 	@Id
@@ -22,18 +25,21 @@ public class PostagensModel {
 	private long id;
 	
 	@NotNull
-	@Size(min = 5, max = 100)
+	@Size(min = 5, max = 100, message = "O mínimo de caracteres é 5 e no máximo 100")
 	private String titulo;
 	
 	@NotNull
-	@Size(min = 10, max = 1000)
+	@Size(min = 10, max = 1000, message = "O mínimo de caracteres é 10 e no máximo 1000")
 	private String texto;
 	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataRegistro = new java.sql.Date(System.currentTimeMillis()); 
 	
-	
+	@ManyToOne // muitos para um
+	@JsonIgnoreProperties("postagem") //se não tiver o @JsonIgnoreProperties, fica um loop infinito mostrando os temas associados a postagens
+	private TemaModel tema;
+	//não esquecer dos gets e sets de tema
 	
 	public long getId() {
 		return id;
@@ -65,6 +71,14 @@ public class PostagensModel {
 
 	public void setDataRegistro(Date dataRegistro) {
 		this.dataRegistro = dataRegistro;
+	}
+
+	public TemaModel getTema() {
+		return tema;
+	}
+
+	public void setTema(TemaModel tema) {
+		this.tema = tema;
 	}
 	
 	

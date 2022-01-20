@@ -21,22 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/postagens")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*") // para aceitar requisão de qualquer origem
 public class PostagensController {
 	
 	@Autowired
-	private PostagensRepository namerepository;
+	private PostagensRepository repository;
 	
 	@GetMapping
 	public ResponseEntity<List<PostagensModel>> GetAll(){
-		return ResponseEntity.ok(namerepository.findAll());
+		return ResponseEntity.ok(repository.findAll());
 		
 	}
 	
 	
 	@GetMapping("/{id}") 
 	public ResponseEntity<PostagensModel> getById(@PathVariable long id){ 
-		return namerepository.findById(id) 
+		return repository.findById(id) 
 				.map(resposta -> ResponseEntity.ok(resposta)) 
 				.orElse(ResponseEntity.notFound().build()); 
 	}
@@ -45,34 +45,32 @@ public class PostagensController {
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<List<PostagensModel>> getByTitulo(@PathVariable String titulo)
 	{
-		return ResponseEntity.ok(namerepository.findAllByTituloContainingIgnoreCase(titulo));
+		return ResponseEntity.ok(repository.findAllByTituloContainingIgnoreCase(titulo));
 		
 	}
 	
 	@PostMapping
 	public ResponseEntity<PostagensModel> postPostagensModel (@Valid @RequestBody PostagensModel postagem) 
 	{
-		return ResponseEntity.status(HttpStatus.CREATED).body(namerepository.save(postagem));
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 	}
 	
 	
 	@PutMapping
 	public  ResponseEntity<PostagensModel> putPostagensModel (@Valid @RequestBody PostagensModel postagensMo)
 	{
-	return namerepository.findById(postagensMo.getId())
-			.map(resposta -> ResponseEntity.ok().body(namerepository.save(postagensMo)))
+	return repository.findById(postagensMo.getId())
+			.map(resposta -> ResponseEntity.ok().body(repository.save(postagensMo)))
 			.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletePostagensModel(@PathVariable long id) {
 		
-		return namerepository.findById(id)
-				.map(resposta -> {
-					namerepository.deleteById(id);
+		return repository.findById(id).map(resposta -> {repository.deleteById(id);
 					return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 				})
-				.orElse(ResponseEntity.notFound().build());
+				.orElse(ResponseEntity.notFound().build()); 
 	}
 }
 
