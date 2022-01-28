@@ -41,6 +41,10 @@ public class PostagensModel {
 	private TemaModel tema;
 	//não esquecer dos gets e sets de tema
 	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private UsuarioModel usuario;
+	
 	public long getId() {
 		return id;
 	}
