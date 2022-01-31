@@ -44,6 +44,10 @@ private Date dataJogo;
 private Categoria categoria;
 //nÃ£o esquecer dos gets e sets do produto
 
+@ManyToOne
+@JsonIgnoreProperties("produto")
+private Usuario usuario;
+
 public long getId() {
 	return id;
 }
@@ -98,6 +102,14 @@ public Categoria getCategoria() {
 
 public void setCategoria(Categoria categoria) {
 	this.categoria = categoria;
+}
+
+public Usuario getUsuario() {
+	return usuario;
+}
+
+public void setUsuario(Usuario usuario) {
+	this.usuario = usuario;
 }
 
 
