@@ -27,7 +27,7 @@ private long id;
 private String nome;
 
 @NotBlank(message = "Esse campo não pode ficar vazio")
-@Email(message = "O atributo Usuario deve ser um email válido") // deve ser formato email
+@Email(message = "O atributo Usuario deve ser um email válido") // deve ser formato email: @gmail.com
 private String usuario;
 
 @NotBlank(message = "O atributo senha é obrigatori")
@@ -39,6 +39,21 @@ private String foto;
 @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 @JsonIgnoreProperties("usuario")
 private List <PostagensModel> postagem;
+
+
+public UsuarioModel(long id, String nome,String usuario, String senha,String foto) {
+
+	this.id = id;
+	this.nome = nome;
+	this.usuario = usuario;
+	this.senha = senha;
+	this.foto = foto;
+}
+
+public UsuarioModel()
+{
+	
+}
 
 public long getId() {
 	return id;

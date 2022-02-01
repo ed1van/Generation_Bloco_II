@@ -84,6 +84,14 @@ public class PostagensModel {
 	public void setTema(TemaModel tema) {
 		this.tema = tema;
 	}
+
+	public UsuarioModel getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioModel usuario) {
+		this.usuario = usuario;
+	}
 	
 	
 }

@@ -1,15 +1,30 @@
 package org.generation.meuBlog.model;
 
+//classe molde para fazer o login
 public class UsuarioLoginModel {
 
+	private long id;
+	
 	private String nome;
 	
 	private String usuario;
 	
 	private String senha;
 	
+	private String foto;
+	
 	private String token;
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -41,6 +56,16 @@ public class UsuarioLoginModel {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	
 	
 	
 	
